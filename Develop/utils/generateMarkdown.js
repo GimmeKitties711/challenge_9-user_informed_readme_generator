@@ -4,7 +4,8 @@ let licenses = ['Apache_2.0', 'GPL_v3', 'MIT', 'BSD_2--Clause', 'BSD_3--Clause',
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   let license_colors = ['blue', 'blue', 'yellow', 'orange', 'orange', 'lightblue', 'lightgrey', 'red', 'blue', 'blue', 'blue', 'brightgreen', 'blue']; // source for the colors that correspond to the licenses: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
-  let chosenLicense = licenses.indexOf(license); // source for finding the first index that corresponds to an element in an array: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf, this method can be used because every entry in the licenses array is unique
+  let chosenLicense = licenses.indexOf(license); // source for finding the first index that corresponds to an element in an array: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+  // this method can be used because every entry in the licenses array is unique
   if (license !== 'none') { // if a license has been selected
     return `![GitHub license](https://img.shields.io/badge/License-${license}-${license_colors[chosenLicense]}.svg)`;
   }
@@ -35,7 +36,29 @@ function renderLicenseSection(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
-
+${renderLicenseBadge(data.license)}
+## Description
+${data.description}
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage) // should I put credits after this?
+- [Contribution](#contribution)
+- [Testing](#testing)
+${renderLicenseLink(data.license)}
+- [Contact Me](#contact-me)
+## Installation
+${data.installation}
+## Usage
+${data.usage}
+credits??
+## Contribution
+${data.contribution}
+## Testing
+${data.testing}
+${renderLicenseSection(data.license)}
+## Contact Me
+If you have any questions for me, you can [follow me on GitHub](github.com/${data.username}) or email me at ${data.email}.
 `;
 }
 
