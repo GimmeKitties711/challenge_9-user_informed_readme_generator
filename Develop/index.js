@@ -1,12 +1,13 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
-const path = require("path");
-const generateMarkdown = require("./utils/generateMarkdown")
+//const path = require("path");
+const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
 //const questions = ['Enter project title:', 'Enter a description:', 'Enter installation instructions:', 'Enter usage information:', 'Enter contribution guidelines:', 'Enter testing instructions', 'Choose a license:', 'Enter your GitHub username:', 'Enter your email address:'];
 
+// this array was written using the inquirer documentation: https://www.npmjs.com/package/inquirer
 const questions = [
     {
         type: "input",
@@ -88,10 +89,37 @@ const questions = [
 ]
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(fileName, data); // writeFileSync documentation: https://nodejs.org/api/fs.html#fswritefilesyncfile-data-options
+}
+
+function processTitleString(title) {
+    // let result = text.replace("Microsoft", "W3Schools");
+    // source for the replace method in strings: https://www.w3schools.com/jsref/jsref_replace.asp
+    let processedString = title.replace('\u0020', '\u005F');
+    // let text = "Mr. Blue has a blue house";
+    // let position = text.search("Blue");
+    // source for special character unicode: https://owasp.org/www-community/password-special-characters
+    forbiddenChars = ['\u005C', '\u002F', '\u003A', '\u002A', '\u003F', '\u0022', '\u003C', '\u003E', '\u007C'];
+    for (i=0; i < forbiddenChars.length; i++) {
+        if (title.search(forbiddenChars[i]) !== -1) {
+            processedString = processedString.replace(forbiddenChars[i], '\u005F');
+        }
+    }
+    // source for the search method in strings: https://www.w3schools.com/jsref/jsref_search.asp
+    // const generateMarkdown = require("./utils/generateMarkdown")
+    let folderName = "./test/";
+    processedString = folderName.concat(processedString, "_README.md");
+    return processedString;
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.createPromptModule(questions).then((responses) => {
+        console.log("Creating a professional README file for your project...");
+        writeToFile(processTitleString(JSON.stringify(responses.title)), generateMarkdown(JSON.stringify(responses)));
+    })
+}
 
 // Function call to initialize app
 init();
