@@ -16,10 +16,10 @@ const questions = [ // array of objects
         validate: function(answer) {
             if (answer.length < 1) { // if no title is given
                 return console.log("You must enter a project title.");
-            } else if (answer.search('\\t') !== -1) { // if title contains tab characters - the search method returns -1 if the string is not found
-                return console.log("You cannot include tab characters in your title.");
+            } //else if (answer.search('\\t') !== -1) { // if title contains tab characters - the search method returns -1 if the string is not found
+                //return console.log("You cannot include tab characters in your title.");
                 // source for the search method in strings: https://www.w3schools.com/jsref/jsref_search.asp
-            }
+            //}
             return true; // if a valid title without tab characters is given
         }
     },
@@ -113,6 +113,11 @@ function processTitleString(title) {
     // source for the replaceAll method in strings: https://www.w3schools.com/jsref/jsref_string_replaceall.asp
     let processedString = title.replaceAll(' ', '_');
     // replaces all spaces with underscores. although spaces are allowed in filenames, I have decided to replace them because they could be problematic for file handling systems, source: https://superuser.com/questions/29111/what-technical-reasons-exist-for-not-using-space-characters-in-file-names
+
+    // testing
+    processedString = processedString.replaceAll('\u0009', '_');
+    // source for tab character unicode: https://stackoverflow.com/questions/9660987/how-to-get-a-tab-character
+
     processedString = processedString.replace(/[\\*\/*\:*\**\?*\"*\<*\>*\|*]/g, "-"); // source for how to use RegExp: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
     // this RegExp does a global search (through the whole processedString) and for every character where there is at least one instance of one of the forbidden characters, it is replaced with "-"
 
@@ -125,9 +130,9 @@ function processTitleString(title) {
 // TODO: Create a function to initialize app
 function init() {
     // important precautions that the user should take when answering the prompts for a new README file
-    console.log("\x1B[1mImportant (1/3):\x1B[m Inquirer only allows you to write on one line. Pressing the Enter key will move you to the next question. If you want to write a new line, use the \x1B[1m<br>\x1B[m tag. For example: This is line 1.<br> This is line 2.");
-    console.log("\x1B[1mImportant (2/3):\x1B[m The writeFileSync function requires unique file names. This README generator writes file names as \x1B[1mtitle_README.md,\x1B[m so if you use the same title for two different README files, the first one will be overwritten.");
-    console.log("\x1B[1mImportant (3/3):\x1B[m Your title cannot include a tab because it causes problems with file creation. A tab is written as \x1B[1m\\t,\x1B[m and the backslash is not allowed in file names.");
+    console.log("\x1B[1mImportant (1/2):\x1B[m Inquirer only allows you to write on one line. Pressing the Enter key will move you to the next question. If you want to write a new line, use the \x1B[1m<br>\x1B[m tag. For example: This is line 1.<br> This is line 2.");
+    console.log("\x1B[1mImportant (2/2):\x1B[m The writeFileSync function requires unique file names. This README generator writes file names as \x1B[1mtitle_README.md,\x1B[m so if you use the same title for two different README files, the first one will be overwritten.");
+    //console.log("\x1B[1mImportant (3/3):\x1B[m Your title cannot include a tab because it causes problems with file creation. A tab is written as \x1B[1m\\t,\x1B[m and the backslash is not allowed in file names.");
     // source for console logging bolded text using ANSI (American National Standards Institute) escape sequences: https://developer.chrome.com/docs/devtools/console/format-style/#style-console-messages
     inquirer.prompt(questions).then((responses) => {
         console.log("Creating a professional README file for your project...");
