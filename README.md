@@ -17,11 +17,27 @@ It is important for any project on GitHub to be supported by good documentation 
 
 ## Installation
 
-Before the program can be run, 
+Before the program can be run, you must open the index.js file in the integrated terminal:
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+![Open in integrated terminal](assets/images/Open_in_integrated_terminal.png)
+
+and in the terminal, type:
+
+    npm install
+
+This will install all of the node modules from **inquirer** and **inquirer-search-list** packages, as shown in the package dependencies:
+
+![package.json dependencies](assets/images/Package_JSON_dependencies.png)
 
 ## Usage
+
+This program is invoked by typing the following in the terminal:
+
+    node index.js
+
+This brings up a series of questions to answer to provide information for the README. There are three things to be aware of as you are providing your answers:
+
+
 
 Provide instructions and examples for use. Include screenshots as needed.
 
