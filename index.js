@@ -110,18 +110,17 @@ function processTitleString(title) {
 
     the title is included in the file name, so if the title contains any of the forbidden characters, they need to be filtered out. I have decided to change all of them to a dash (-).
     */
-    // source for the replaceAll method in strings: https://www.w3schools.com/jsref/jsref_string_replaceall.asp
-    let processedString = title.replaceAll(' ', '_');
-    // replaces all spaces with underscores. although spaces are allowed in filenames, I have decided to replace them because they could be problematic for file handling systems, source: https://superuser.com/questions/29111/what-technical-reasons-exist-for-not-using-space-characters-in-file-names
 
-    // testing
-    processedString = processedString.replaceAll('\u0009', '_');
+    processedString = title.replace(/[\u0020*\u0009*]/g, "_");
+    // this RegExp does a global search (through the whole title) and for every character where there is at least one instance of a space (\u0020) or a tab character (\u0009), it is replaced with an underscore. although spaces are allowed in filenames, I have decided to replace them because they could be problematic for file handling systems, source: https://superuser.com/questions/29111/what-technical-reasons-exist-for-not-using-space-characters-in-file-names
+
+    // source for how to use RegExp: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
+    // source for special character unicode: https://owasp.org/www-community/password-special-characters
     // source for tab character unicode: https://stackoverflow.com/questions/9660987/how-to-get-a-tab-character
 
-    processedString = processedString.replace(/[\\*\/*\:*\**\?*\"*\<*\>*\|*]/g, "-"); // source for how to use RegExp: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
-    // this RegExp does a global search (through the whole processedString) and for every character where there is at least one instance of one of the forbidden characters, it is replaced with "-"
-
+    processedString = processedString.replace(/[\\*\/*\:*\**\?*\"*\<*\>*\|*]/g, "-"); // replaces all forbidden characters with dashes
     // source for the replace method in strings: https://www.w3schools.com/jsref/jsref_replace.asp
+
     processedString = `./example/${processedString}_README.md`;
     // creates file name string as './folder/title_README.md'. I have decided to include the project title in the file name to allow the user to create as many READMEs as they want as long as each of them has a unique title.
     return processedString;
