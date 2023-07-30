@@ -57,11 +57,13 @@ The following screenshots demonstrate the appearance of the application:
 ![Generated example README (1 of 2)](assets/images/Generated_README_top.png)
 ![Generated example README (2 of 2)](assets/images/Generated_README_bottom.png)
 
+A **walkthrough video** demonstrating this project in action can be found [here](https://www.youtube.com/watch?v=K2HNEFVI21M).
+
 ## Credits
 
 Asked questions in the *# 02-ask-the-class* channel on Slack and received assistance from student Jesus Santos, TAs Elena Rogers and Michael Seaman, and instructor Robbert Wijtman.
 
-The following web resources helped me write the code for my project:
+The following web resources helped me write the code for this project:
 1. [Registering the search-list prompt for inquirer](https://www.npmjs.com/package/inquirer-search-list?activeTab=readme)
 2. [Inquirer documentation](https://www.npmjs.com/package/inquirer)
 3. [writeFileSync method](https://www.geeksforgeeks.org/node-js-fs-writefilesync-method/)
