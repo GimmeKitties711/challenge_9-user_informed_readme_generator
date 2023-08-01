@@ -118,7 +118,7 @@ function processTitleString(title) {
     processedString = processedString.replace(/[\\*\/*\:*\**\?*\"*\<*\>*\|*]/g, "-"); // replaces all forbidden characters with dashes
     // source for the replace method in strings: https://www.w3schools.com/jsref/jsref_replace.asp
 
-    processedString = `./example/${processedString}_README.md`;
+    processedString = `./sample/${processedString}_README.md`;
     // creates file name string as './folder/title_README.md'. I have decided to include the project title in the file name to allow the user to create as many READMEs as they want as long as each of them has a unique title.
     return processedString;
 }
